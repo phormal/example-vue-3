@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref, onMounted, onBeforeUnmount} from "vue";
 import {Phormal, useLength, useEmail, useRequired} from "@phormal/core";
 
 const formFields = {
@@ -38,6 +38,10 @@ const phormal = ref(null);
 
 onMounted(() => {
   phormal.value = new Phormal(formFields, formConfig);
+});
+
+onBeforeUnmount(() => {
+  phormal.value.$destroy();
 });
 
 </script>
